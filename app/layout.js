@@ -13,6 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <script src="../node_modules/flyonui/flyonui.js"></script>
       <body className={inter.className}>
         <ContextState>
          <Nav/>

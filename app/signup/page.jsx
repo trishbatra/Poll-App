@@ -15,15 +15,15 @@ const page = () => {
     <>
    <form className='border border-purple-600 p-4 rounded-xl text-center mx-64'   >
       <h1 className="text-2xl font-bold">SignUp for Pollify</h1>
-        <label className='block text-center'  htmlFor="name">Name</label>
+        <label className='text-center'  htmlFor="name">Name</label>
         <input 
-        className='flex m-auto  text-purple-400 focus:ring-[3px] focus:ring-purple-400 focus:outline-none  my-3 p-2 rounded-2xl'
+        className='input no-focus border-0 max-w-sm'
         type="text" 
         name='name'
         required="true"
         onChange={(e)=>{ setcreds({...creds, [e.target.name] : e.target.value})}}
          />
-        <label className='block text-center'  htmlFor="email">Email</label>
+        <label className=' text-center'  htmlFor="email">Email</label>
         <input 
         className='flex m-auto  text-purple-400 focus:ring-[3px] focus:ring-purple-400 focus:outline-none my-3  p-2 rounded-2xl'
         type="email" 
@@ -31,9 +31,9 @@ const page = () => {
         required="true"
         onChange={(e)=>{ setcreds({...creds, [e.target.name]: e.target.value}) }}
          />
-        <label className='block text-center' htmlFor="password">Password</label>
+        <label className=' text-center' htmlFor="password">Password</label>
         <input 
-        className='flex m-auto text-purple-400 focus:ring-[3px] focus:ring-purple-400 focus:outline-none  my-3  p-2 rounded-2xl'
+        className='input max-w-sm  '
         type="password" 
         name='password'
         required="true"

@@ -1,7 +1,5 @@
 "use client"
-import React, { useContext} from 'react';
-import Image from "next/image";
-import logo from '../Images/logo.png';
+import React, { useContext, useEffect, useState} from 'react';
 import Link from "next/link";
 import { FaPoll } from "react-icons/fa";
 import {  toast, Bounce } from "react-toastify";
@@ -9,11 +7,20 @@ import "react-toastify/dist/ReactToastify.css";
 import { authContext } from '@/Context/context';
 
 const Nav = () => {
-    const auth = useContext(authContext)
+  const auth = useContext(authContext)
+  const [token , settoken ] = useState(null)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+        settoken(localStorage.getItem("tkn"));
+    }
+}, []);
+  
   const handleLogout = () => {
     auth.settkn(null); 
-    localStorage.removeItem("tkn")
-    toast.success(`Loggeed Out ✅`, {
+    localStorage.removeItem("tkn");
+    settoken(null);
+
+    toast.success(`Logged Out ✅`, {
       position: "top-right",
       autoClose: 500,
       hideProgressBar: false,
@@ -23,12 +30,13 @@ const Nav = () => {
       progress: undefined,
       theme: "dark",
       transition: Bounce,
-      });
+    });
+    
   };
   return (
     <>
-    <div className="flex justify-between items-center mx-36 my-4">
-      <div className="flex items-center space-x-4 ">
+    <div className="flex justify-between items-center ml-[5rem] mr-[1rem] relative ">
+      <div className="flex items-center space-x-4 my-4">
         <Link href="/">
           <FaPoll size={72} />
         </Link>
@@ -37,25 +45,25 @@ const Nav = () => {
       </div>
       <div className="flex space-x-14">
         <Link href="/Createpolls">
-          <button className="bg-purple-400 text-white p-3 rounded-lg transition duration-300 ease-in-out hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          <button className="btn btn-gradient btn-primary hover:scale-105">
             Create Polls
           </button>
         </Link>
         {!localStorage.getItem("tkn")? (
           <div className='mx-5'>
             <Link href="/signup">
-              <button className="bg-purple-400 text-white p-3 mx-5 rounded-lg transition duration-300 ease-in-out hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+              <button className="btn btn-gradient mx-2 btn-info hover:scale-105">
                 Signup
               </button>
             </Link>
             <Link href="/login">
-              <button className="bg-purple-400 text-white p-3 mx-5  rounded-lg transition duration-300 ease-in-out hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+              <button className="btn btn-gradient mx-2 btn-info  hover:scale-105">
                 Login
               </button>
             </Link>
           </div>
         ) : (
-          <button onClick={handleLogout} className="bg-purple-400 text-white p-3 rounded-lg transition duration-300 ease-in-out hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          <button onClick={handleLogout} className="btn btn-gradient btn-accent hover:scale-105">
             Logout
           </button>
         )}

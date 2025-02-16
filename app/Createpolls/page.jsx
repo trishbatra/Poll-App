@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Polls from '@/Components/Polls'
 import { authContext } from '@/Context/context';
 import { ToastContainer, toast, Bounce } from "react-toastify";
+
 const Page = () => {
     const tkn = useContext(authContext)
     const [OptionArr, setOptionArr] = useState(["1", "2"])
@@ -16,7 +17,7 @@ const Page = () => {
             specificUserPolls()
         }
     }, []);
-    console.log("Polllls", polls)
+    
     const AddOption = ()=>{
         const arr = [...OptionArr]
         const elemToPush = OptionArr.length + 1
@@ -67,18 +68,46 @@ const Page = () => {
                 progress: undefined,
                 theme: "dark",
                 transition: Bounce,
-    
                 });
         }
         
     }
-    const removePolls = ()=>{
-        setpollData([])
+    const removePolls = async ()=>{
+        setpolls([])
+        const token = localStorage.getItem("tkn")
+        if(token){
+            const makeReq = await fetch("http://localhost:5500/poll/DeleteAllPoles",
+                {
+                    method: "DELETE",
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        token : token
+                    },
+                }
+            )
+            const reqRes = await makeReq.json()
+            if(reqRes){
+                toast.success(`ALL Poles Deleted`, {
+                 position: "top-right",
+                 autoClose: 1500,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+                 theme: "dark",
+                 transition: Bounce,
+                });
+            }
+        }else{
+            console.log("NO TOKEN")
+        }
     }
   return (
     <>
      <div id='optionFrom' className="flex  flex-col item-center justify-center items-center border border-purple-600 mx-56 p-7 rounded-2xl">
-    {tkn.tkn && <h1 className="text-2xl text-center">Welcome user {tkn.user.name}</h1>}
+    {tkn.tkn && <h1 className="text-2xl text-center">Welcome user {tkn.user.name 
+     ? tkn.user.name : ""}</h1>}
          <button 
          className="bg-red-400 ml-[45em] hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
          onClick={clearOptions}>
@@ -129,10 +158,10 @@ const Page = () => {
             className="bg-red-400 m-3 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={removePolls}
             >
-            Deletr All Polls 
+            Delete All Polls 
             </button>
           </div>
-        <Polls data={polls} />
+        <Polls  data={polls}/>
     </>
   )
 }

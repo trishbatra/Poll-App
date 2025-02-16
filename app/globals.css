@@ -18,7 +18,8 @@
 
 body {
   color: lightsteelblue;
-  background: #323232;
+  background: linear-gradient(to bottom, #1a1a2e, #16213e);
+  min-height: 100vh;
 }
 
 @layer utilities {
