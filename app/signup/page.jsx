@@ -14,7 +14,7 @@ const page = () => {
   return (
     <>
    <form className='border border-purple-600 p-4 rounded-xl text-center mx-64'   >
-      <h1 className="text-2xl font-bold">SignUp for Pollify</h1>
+      <h1 className="text-2xl font-bold mb-3">SignUp for Pollify</h1>
         <label className='text-center'  htmlFor="name">Name</label>
         <input 
         className='input no-focus border-0 max-w-sm'

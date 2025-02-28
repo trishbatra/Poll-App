@@ -22,7 +22,6 @@ const signUserUp =async (req,res)=>{
             email: email,
             password: hashedPass
         })
-        console.log("userToCreate", userToCreate)
     
         const obj = {
             id : userToCreate._id

@@ -12,19 +12,23 @@ const Page = ({ data }) => {
         }else{
             if(localStorage.getItem("loggedInUser")){
                 return JSON.parse(localStorage.getItem("loggedInUser"))
+            }else{
+                return {name: "not logged in"}
             }
         }
     })
     return (
         <>
-            <div className='grid grid-cols-3 mx-48 gap-12'>
+            <div className='grid grid-cols-3 mx-48 gap-12 '>
                 {data.allPoles?.length === 0 ? <p> Create some polls first.... </p> : 
                   data.allPoles?.length === 0 ? <p 
                   className="text-center w-[100%]"> Create some polls first.... </p> : ""
                 }
                 {data.allPoles?.map((poll,index) => (
                     <div className="relative bg-[linear-gradient(169deg,_rgba(34,40,49,1)_60%,_rgba(39,68,93,1)_85%)]
-                     shadow-xl rounded-2xl p-6 m-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                     shadow-xl  p-6 m-2 transition-transform duration-300 hover:scale-105 hover:shadow-2xl
+                    bg-customBackground backdrop-blur-md backdrop-saturate-26 rounded-lg 
+                     ">
 
                         {
                         (data.user?.name && data.user?.name === userr.name) || 
@@ -63,9 +67,9 @@ const Page = ({ data }) => {
                         >
                             Cast Your Vote
                         </button>
-                        <p
+                        {/* <p
                             className="mt-4"
-                        > Created By  :  {poll.user.name ? poll.user.name : data.user.name} </p>
+                        > Created By  :  {poll.user.name ? poll.user.name : data.user.name? data.user.name : "dadd" } </p> */}
                     </div>
                 ))}
             </div>

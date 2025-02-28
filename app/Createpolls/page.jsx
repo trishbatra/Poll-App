@@ -105,22 +105,26 @@ const Page = () => {
     }
   return (
     <>
-     <div id='optionFrom' className="flex  flex-col item-center justify-center items-center border border-purple-600 mx-56 p-7 rounded-2xl">
+     <div id='optionFrom' className="flex border border-[#B0C4DE] flex-col item-center justify-center items-center  
+      p-7 relative rounded-2xl mx-40 ">
     {tkn.tkn && <h1 className="text-2xl text-center">Welcome user {tkn.user.name 
      ? tkn.user.name : ""}</h1>}
          <button 
-         className="bg-red-400 ml-[45em] hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+         className="bg-red-400 ml-[45em] 
+          btn btn-gradient btn-error
+          hover:bg-red-500 text-white font-bold py-2 
+          px-4 rounded focus:outline-none focus:shadow-outline" 
          onClick={clearOptions}>
           Clear all Options
         </button>
-        <div className='flex flex-col justify-center items-center' >
-        <label htmlFor="question" className='text-2xl m-3'>
+        <div className='flex  justify-center items-center' >
+        <label htmlFor="question" className='text-2xl absolute left-[15em] my-3'>
             Enter Poll Question 
         </label>
         <input 
             type="text" 
             name='question' 
-            className='rounded-xl p-2 w-[350px] text-purple-400 focus:ring-[3px] focus:ring-purple-400 focus:outline-none ' 
+            className='input max-w-md relative  no-focus border-0  w-[15em] left-[8em] m-1' 
             onChange={(e)=>setoptionData({...optionData, question: e.target.value})} 
         />
         </div>
@@ -138,24 +142,28 @@ const Page = () => {
             })
         }
             <div className="flex  mt-4">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                <button className="bg-blue-500 hover:bg-blue-700 btn btn-gradient btn-accent
+                 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
                 onClick={AddOption}
                 >
                     Add more options
                 </button>
                 <button 
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-green-500 hover:bg-green-700 text-white btn btn-gradient btn-success
+                font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 onClick={createPoll}
                 >
                     Create Poll
                 </button>
             </div>
         </div>
-        <hr  className='mx-48 mt-4 border border-purple-600' />
+        {/* <hr  className='mx-48 mt-4 border border-purple-600' /> */}
         <div className="flex">
             <h2 className="text-3xl p-3 ml-56">Your Polls</h2>
             <button 
-            className="bg-red-400 m-3 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-red-400 m-3 hover:bg-red-500 text-white 
+            btn btn-gradient btn-error
+            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={removePolls}
             >
             Delete All Polls 
